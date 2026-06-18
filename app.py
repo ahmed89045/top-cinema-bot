@@ -7,8 +7,8 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none;}
 </style>
 """
-st.markdown(hide_streamlit_style, unsafe_html=True)
-st.markdown(hide_streamlit_style, unsafe_html=True)
+st.markdown(hide_streamlit_style,unsafe_html=True)
+st.markdown(hide_streamlit_style,unsafe_html=True)
 from google import genai
 st.set_page_config(page_title="توب سينما - المساعد الذكي", page_icon="OIP.webp")
 # 1. إعداد واجهة الموقع الذكية باستخدام Streamlit
