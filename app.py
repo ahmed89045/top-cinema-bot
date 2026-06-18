@@ -1,4 +1,22 @@
 import streamlit as st
+# كود الـ CSS المطور لإخفاء الشريط السفلي بالكامل وأزرار جيت هاب اللي فوق
+hide_streamlit_style = """
+            <style>
+            /* إخفاء القائمة العلوية وأزرار جيت هاب والـ Fork */
+            header {visibility: hidden; display: none !important;}
+            [data-testid="stHeader"] {id: hidden; display: none !important;}
+            .stAppDeployButton {display: none !important;}
+            
+            /* إخفاء الشريط السفلي بالكامل بما فيه الـ Hosted والـ Created by */
+            footer {visibility: hidden; display: none !important;}
+            [data-testid="stFooter"] {visibility: hidden; display: none !important;}
+            div[data-testid="stDecoration"] {display: none !important;}
+            
+            /* تنظيف المسافات عشان التطبيق يبدأ من فوق خالص */
+            .main .block-container {padding-top: 1rem; padding-bottom: 1rem;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_html=True)
 from google import genai
 st.set_page_config(page_title="توب سينما - المساعد الذكي", page_icon="OIP.webp")
 # 1. إعداد واجهة الموقع الذكية باستخدام Streamlit
