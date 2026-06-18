@@ -1,4 +1,5 @@
 import streamlit as st
+from google import genai
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -9,7 +10,6 @@ header {visibility: hidden;}
 """
 st.markdown(hide_streamlit_style,unsafe_html=True)
 st.markdown(hide_streamlit_style,unsafe_html=True)
-from google import genai
 st.set_page_config(page_title="توب سينما - المساعد الذكي", page_icon="OIP.webp")
 # 1. إعداد واجهة الموقع الذكية باستخدام Streamlit
 st.title("🎬 مساعد توب سينما الذكي")
