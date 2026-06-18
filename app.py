@@ -12,7 +12,7 @@ API_KEY = "AQ.Ab8RN6IpDcHnAcUzOIDxFbhC-Td7dPp0yKqU9LFxoBeHjczzGQ"  # ← غير 
 # تعريف موديل الذكاء الاصطناعي وتحديد شخصيته بالعامية المصرية
 def get_chat_model():
     if "client" not in st.session_state:
-        st.session_state.client = genai.Client(api_key=API_KEY)
+        st.session_state.client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
     if "chat" not in st.session_state:
         system_instruction = (
