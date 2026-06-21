@@ -34,7 +34,7 @@ def save_json(path, data):
 LANGS = {
     "ar": {
         "flag": "🇪🇬", "name": "العربية", "tmdb": "ar", "tts": "ar-EG",
-        "app_title": "🎬 مساعد توب سينما الذكي",
+        "app_title": "Mouven",
         "subtitle": "نسيت اسم فيلم؟ احكيلي قصته أو الممثلين وأنا أجهزهولك",
         "chat_placeholder": "اكتب هنا...",
         "watchlist_header": "📺 قائمتي",
@@ -70,7 +70,7 @@ LANGS = {
     },
     "en": {
         "flag": "🇬🇧", "name": "English", "tmdb": "en", "tts": "en-US",
-        "app_title": "🎬 Top Cinema AI Assistant",
+        "app_title": "Mouven",
         "subtitle": "Forgot a movie's name? Tell me the plot or actors and I'll find it.",
         "chat_placeholder": "Type here...",
         "watchlist_header": "📺 My List",
@@ -106,7 +106,7 @@ LANGS = {
     },
     "fr": {
         "flag": "🇫🇷", "name": "Français", "tmdb": "fr", "tts": "fr-FR",
-        "app_title": "🎬 Assistant IA Top Cinema",
+        "app_title": "Mouven",
         "subtitle": "Vous avez oublié le nom d'un film ? Racontez-moi l'histoire ou les acteurs.",
         "chat_placeholder": "Écrivez ici...",
         "watchlist_header": "📺 Ma liste",
@@ -141,7 +141,7 @@ LANGS = {
     },
     "pt": {
         "flag": "🇧🇷", "name": "Português (Brasil)", "tmdb": "pt-BR", "tts": "pt-BR",
-        "app_title": "🎬 Assistente IA Top Cinema",
+        "app_title": "Mouven",
         "subtitle": "Esqueceu o nome de um filme? Conte a história ou os atores.",
         "chat_placeholder": "Digite aqui...",
         "watchlist_header": "📺 Minha lista",
@@ -176,7 +176,7 @@ LANGS = {
     },
     "hi": {
         "flag": "🇮🇳", "name": "हिन्दी", "tmdb": "hi", "tts": "hi-IN",
-        "app_title": "🎬 टॉप सिनेमा एआई असिस्टेंट",
+        "app_title": "Mouven",
         "subtitle": "किसी फिल्म का नाम भूल गए? कहानी या कलाकारों के बारे में बताएं।",
         "chat_placeholder": "यहाँ लिखें...",
         "watchlist_header": "📺 मेरी सूची",
