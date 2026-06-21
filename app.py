@@ -44,8 +44,6 @@ LANGS = {
         "status_done": "شفته",
         "empty_watchlist": "لسه القائمة فاضية، ضيف أول فيلم! 🍿",
         "details_button": "🔍 تفاصيل",
-        "hide_sidebar": "🙈 إخفاء القائمة",
-        "show_sidebar": "👁️ إظهار القائمة",
         "chats_header": "المحادثات",
         "new_chat": "➕ محادثة جديدة",
         "upload_label": "📷 ارفع صورة سكرين شوت للتعرف على الفيلم",
@@ -80,8 +78,6 @@ LANGS = {
         "status_done": "Watched",
         "empty_watchlist": "Your list is empty, add your first title! 🍿",
         "details_button": "🔍 Details",
-        "hide_sidebar": "🙈 Hide list",
-        "show_sidebar": "👁️ Show list",
         "chats_header": "Chats",
         "new_chat": "➕ New chat",
         "upload_label": "📷 Upload a screenshot to identify the movie",
@@ -116,8 +112,6 @@ LANGS = {
         "status_done": "Vu",
         "empty_watchlist": "Votre liste est vide, ajoutez un premier titre ! 🍿",
         "details_button": "🔍 Détails",
-        "hide_sidebar": "🙈 Masquer la liste",
-        "show_sidebar": "👁️ Afficher la liste",
         "chats_header": "Discussions",
         "new_chat": "➕ Nouvelle discussion",
         "upload_label": "📷 Téléchargez une capture d'écran pour identifier le film",
@@ -151,8 +145,6 @@ LANGS = {
         "status_done": "Já assisti",
         "empty_watchlist": "Sua lista está vazia, adicione o primeiro título! 🍿",
         "details_button": "🔍 Detalhes",
-        "hide_sidebar": "🙈 Ocultar lista",
-        "show_sidebar": "👁️ Mostrar lista",
         "chats_header": "Conversas",
         "new_chat": "➕ Nova conversa",
         "upload_label": "📷 Envie uma captura de tela para identificar o filme",
@@ -186,8 +178,6 @@ LANGS = {
         "status_done": "देख लिया",
         "empty_watchlist": "आपकी सूची खाली है, पहली फिल्म जोड़ें! 🍿",
         "details_button": "🔍 विवरण",
-        "hide_sidebar": "🙈 सूची छिपाएं",
-        "show_sidebar": "👁️ सूची दिखाएं",
         "chats_header": "बातचीत",
         "new_chat": "➕ नई बातचीत",
         "upload_label": "📷 फिल्म पहचानने के लिए स्क्रीनशॉट अपलोड करें",
@@ -410,9 +400,6 @@ if "messages" not in st.session_state:
 if "show_chats_panel" not in st.session_state:
     st.session_state.show_chats_panel = False
 
-if "show_sidebar" not in st.session_state:
-    st.session_state.show_sidebar = True
-
 if "watchlist" not in st.session_state:
     st.session_state.watchlist = load_json(WATCHLIST_FILE, [])
 
@@ -455,27 +442,7 @@ def load_conversation(conv):
 
 
 # ==================================================================
-# 7. زرار إظهار/إخفاء القائمة الجانبية بالكامل
-# ==================================================================
-sidebar_display = "block" if st.session_state.show_sidebar else "none"
-st.markdown(
-    f"""
-    <style>
-    [data-testid="stSidebar"] {{ display: {sidebar_display}; }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-top_col = st.columns([1, 5])[0]
-with top_col:
-    btn_label = L["hide_sidebar"] if st.session_state.show_sidebar else L["show_sidebar"]
-    if st.button(btn_label, key="toggle_sidebar_btn"):
-        st.session_state.show_sidebar = not st.session_state.show_sidebar
-        st.rerun()
-
-# ==================================================================
-# 8. القائمة الجانبية: محادثات + خط فاصل + قائمة الأفلام
+# 7. القائمة الجانبية: محادثات + خط فاصل + قائمة الأفلام
 # ==================================================================
 with st.sidebar:
     menu_col1, menu_col2 = st.columns([1, 4])
@@ -505,3 +472,35 @@ with st.sidebar:
     with st.form("add_item_form", clear_on_submit=True):
         new_title = st.text_input(L["name_field"])
         new_status = st.radio(L["status_field"], [L["status_watch"], L["status_done"]], horizontal=True)
+        submitted = st.form_submit_button(L["add_button"])
+
+        if submitted and new_title.strip():
+            st.session_state.watchlist.append({"title": new_title.strip(), "status": new_status})
+            save_json(WATCHLIST_FILE, st.session_state.watchlist)
+            st.rerun()
+
+    st.divider()
+
+    if not st.session_state.watchlist:
+        st.info(L["empty_watchlist"])
+    else:
+        for i, item in enumerate(st.session_state.watchlist):
+            done = item["status"] == L["status_done"]
+            card_class = "watch-card done" if done else "watch-card"
+            icon = "✅" if done else "🕒"
+
+            col1, col2 = st.columns([5, 1])
+            with col1:
+                st.markdown(
+                    f"""
+                    <div class="{card_class}">
+                        <div class="watch-title">{icon} {item['title']}</div>
+                        <div class="watch-status">{item['status']}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            with col2:
+                if st.button("🗑️", key=f"delete_{i}"):
+                    st.session_state.watchlist.pop(i)
+                    save_js
