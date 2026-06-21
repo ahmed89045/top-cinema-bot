@@ -13,7 +13,7 @@ import requests
 WATCHLIST_FILE = "watchlist.json"
 CONVERSATIONS_FILE = "conversations.json"
 
-st.set_page_config(page_title="Top Cinema AI", page_icon="OIP.webp")
+st.set_page_config(page_title="Mouven", page_icon="images.jpeg")
 
 
 def load_json(path, default):
@@ -504,4 +504,4 @@ with st.sidebar:
 
     with st.form("add_item_form", clear_on_submit=True):
         new_title = st.text_input(L["name_field"])
-        new_status = st.radio(L["statu
+        new_status = st.radio(L["statu"])
