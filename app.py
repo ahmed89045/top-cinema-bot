@@ -58,7 +58,7 @@ LANGS = {
         "cast": "🎭 الممثلين",
         "rating": "⭐ التقييم",
         "system_instruction": (
-            "أنت مساعد ذكي مخصص لموقع أفلام اسمه (توب سينما)."
+            "أنت مساعد ذكي مخصص لموقع أفلام اسمه (Mouven)."
             "وظيفتك الأساسية هي مساعدة المستخدم في معرفة اسم الفيلم الذي يريده."
             "تتحدث بالعامية المصرية الودودة والذكية جداً."
             "إذا ذكر المستخدم تفاصيل صغيرة (مثل قصة، مشهد، ممثل)، قم بتخمين الفيلم."
@@ -94,7 +94,7 @@ LANGS = {
         "cast": "🎭 Cast",
         "rating": "⭐ Rating",
         "system_instruction": (
-            "You are a smart assistant for a movie website called 'Top Cinema'. "
+            "You are a smart assistant for a movie website called 'Mouven'. "
             "Your main job is helping the user figure out the name of a movie or show they're thinking of. "
             "Speak in a friendly, witty, conversational tone in English. "
             "If the user gives small clues (a scene, an actor, a detail), try to guess the title. "
@@ -130,7 +130,7 @@ LANGS = {
         "cast": "🎭 Acteurs",
         "rating": "⭐ Note",
         "system_instruction": (
-            "Vous êtes un assistant intelligent pour un site de films appelé 'Top Cinema'. "
+            "Vous êtes un assistant intelligent pour un site de films appelé 'Mouven'. "
             "Votre rôle est d'aider l'utilisateur à retrouver le nom d'un film ou d'une série. "
             "Parlez en français, avec un ton amical et vif. "
             "Si l'utilisateur donne de petits indices, devinez le titre. "
@@ -165,7 +165,7 @@ LANGS = {
         "cast": "🎭 Elenco",
         "rating": "⭐ Avaliação",
         "system_instruction": (
-            "Você é um assistente inteligente para um site de filmes chamado 'Top Cinema'. "
+            "Você é um assistente inteligente para um site de filmes chamado 'Mouven'. "
             "Sua função é ajudar o usuário a descobrir o nome de um filme ou série. "
             "Fale em português do Brasil, com um tom amigável e animado. "
             "Se o usuário der pequenas pistas, tente adivinhar o título. "
@@ -200,7 +200,7 @@ LANGS = {
         "cast": "🎭 कलाकार",
         "rating": "⭐ रेटिंग",
         "system_instruction": (
-            "आप 'Top Cinema' नाम की मूवी वेबसाइट के लिए एक स्मार्ट असिस्टेंट हैं। "
+            "आप 'Mouven' नाम की मूवी वेबसाइट के लिए एक स्मार्ट असिस्टेंट हैं। "
             "आपका मुख्य काम यूज़र को किसी फिल्म या शो का नाम याद दिलाने में मदद करना है। "
             "हिंदी में दोस्ताना और मज़ेदार अंदाज़ में बात करें। "
             "अगर यूज़र छोटे संकेत दे, तो नाम का अंदाज़ा लगाने की कोशिश करें। "
