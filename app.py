@@ -13,7 +13,7 @@ import requests
 WATCHLIST_FILE = "watchlist.json"
 CONVERSATIONS_FILE = "conversations.json"
 
-st.set_page_config(page_title="Mouven", page_icon="images.jpeg")
+st.set_page_config(page_title="Mouven", page_icon="OIP.webp")
 
 
 def load_json(path, default):
@@ -34,7 +34,7 @@ def save_json(path, data):
 LANGS = {
     "ar": {
         "flag": "🇪🇬", "name": "العربية", "tmdb": "ar", "tts": "ar-EG",
-        "app_title": "Mouven",
+        "app_title": "🎬 مساعد Mouven",
         "subtitle": "نسيت اسم فيلم؟ احكيلي قصته أو الممثلين وأنا أجهزهولك",
         "chat_placeholder": "اكتب هنا...",
         "watchlist_header": "📺 قائمتي",
@@ -70,7 +70,7 @@ LANGS = {
     },
     "en": {
         "flag": "🇬🇧", "name": "English", "tmdb": "en", "tts": "en-US",
-        "app_title": "Mouven",
+        "app_title": "🎬 Mouven",
         "subtitle": "Forgot a movie's name? Tell me the plot or actors and I'll find it.",
         "chat_placeholder": "Type here...",
         "watchlist_header": "📺 My List",
@@ -106,7 +106,7 @@ LANGS = {
     },
     "fr": {
         "flag": "🇫🇷", "name": "Français", "tmdb": "fr", "tts": "fr-FR",
-        "app_title": "Mouven",
+        "app_title": "🎬 Assistant IA Mouven",
         "subtitle": "Vous avez oublié le nom d'un film ? Racontez-moi l'histoire ou les acteurs.",
         "chat_placeholder": "Écrivez ici...",
         "watchlist_header": "📺 Ma liste",
@@ -141,7 +141,7 @@ LANGS = {
     },
     "pt": {
         "flag": "🇧🇷", "name": "Português (Brasil)", "tmdb": "pt-BR", "tts": "pt-BR",
-        "app_title": "Mouven",
+        "app_title": "🎬 Assistente IA Mouven",
         "subtitle": "Esqueceu o nome de um filme? Conte a história ou os atores.",
         "chat_placeholder": "Digite aqui...",
         "watchlist_header": "📺 Minha lista",
@@ -176,7 +176,7 @@ LANGS = {
     },
     "hi": {
         "flag": "🇮🇳", "name": "हिन्दी", "tmdb": "hi", "tts": "hi-IN",
-        "app_title": "Mouven",
+        "app_title": "🎬 टॉप सिनेमा एआई असिस्टेंट",
         "subtitle": "किसी फिल्म का नाम भूल गए? कहानी या कलाकारों के बारे में बताएं।",
         "chat_placeholder": "यहाँ लिखें...",
         "watchlist_header": "📺 मेरी सूची",
@@ -225,7 +225,7 @@ if "lang" not in st.session_state:
         """,
         unsafe_allow_html=True,
     )
-    st.markdown("<h1 style='text-align:center;'>🎬 Top Cinema AI</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align:center;'>🎬 Mouven</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align:center;'>Choose your language / اختر اللغة</h3>", unsafe_allow_html=True)
     st.write("")
     cols = st.columns(len(LANGS))
@@ -504,4 +504,4 @@ with st.sidebar:
 
     with st.form("add_item_form", clear_on_submit=True):
         new_title = st.text_input(L["name_field"])
-        new_status = st.radio(L["statu"])
+        new_status = st.radio(L["status_field"], [L["status_watch"], L["status_done"]], horizontal=True)
