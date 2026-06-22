@@ -503,4 +503,121 @@ with st.sidebar:
             with col2:
                 if st.button("🗑️", key=f"delete_{i}"):
                     st.session_state.watchlist.pop(i)
-                    save_js
+                    save_json(WATCHLIST_FILE, st.session_state.watchlist)
+                    st.rerun()
+
+            details_key = f"show_details_{i}"
+            if details_key not in st.session_state:
+                st.session_state[details_key] = False
+
+            if st.button(L["details_button"], key=f"details_btn_{i}"):
+                st.session_state[details_key] = not st.session_state[details_key]
+
+            if st.session_state[details_key]:
+                with st.spinner("..."):
+                    render_movie_details(item["title"], L["tmdb"], L)
+
+# ==================================================================
+# 9. موديل الذكاء الاصطناعي (Gemini)
+# ==================================================================
+def get_chat_model():
+    if "client" not in st.session_state:
+        st.session_state.client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
+
+    if "chat" not in st.session_state:
+        history = []
+        for m in st.session_state.messages:
+            role = "user" if m["role"] == "user" else "model"
+            history.append(types.Content(role=role, parts=[types.Part(text=m["content"])]))
+
+        st.session_state.chat = st.session_state.client.chats.create(
+            model="gemini-2.5-flash",
+            config={"system_instruction": L["system_instruction"]},
+            history=history,
+        )
+
+    return st.session_state.chat
+
+
+try:
+    chat = get_chat_model()
+except Exception as e:
+    st.error(f"❌ خطأ في الاتصال بالذكاء الاصطناعي: {e}")
+    st.stop()
+
+# ==================================================================
+# 10. واجهة الشات الرئيسية
+# ==================================================================
+st.title(L["app_title"])
+st.write(L["subtitle"])
+
+st.session_state.speak_enabled = st.toggle(
+    L["speak_toggle"], value=st.session_state.speak_enabled
+)
+
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.write(message["content"])
+
+# --- رفع صورة سكرين شوت ---
+uploaded_image = st.file_uploader(
+    L["upload_label"], type=["png", "jpg", "jpeg"], key="img_uploader"
+)
+
+# --- تسجيل صوتي (اختياري) ---
+audio_value = None
+try:
+    if hasattr(st, "audio_input"):
+        audio_value = st.audio_input(L["voice_label"], key="voice_input")
+except Exception:
+    pass
+
+user_input = st.chat_input(L["chat_placeholder"])
+
+new_user_message_parts = None
+display_text = None
+
+if user_input:
+    display_text = user_input
+    new_user_message_parts = [user_input]
+
+elif (
+    uploaded_image is not None
+    and st.session_state.get("last_image_id") != uploaded_image.file_id
+):
+    st.session_state.last_image_id = uploaded_image.file_id
+    img_bytes = uploaded_image.getvalue()
+    display_text = "📷 [صورة سكرين شوت]"
+    new_user_message_parts = [
+        types.Part.from_bytes(data=img_bytes, mime_type=uploaded_image.type),
+        "حاول تتعرف على الفيلم أو المسلسل من الصورة دي",
+    ]
+
+elif (
+    audio_value is not None
+    and st.session_state.get("last_audio_id") != audio_value.file_id
+):
+    st.session_state.last_audio_id = audio_value.file_id
+    audio_bytes = audio_value.getvalue()
+    display_text = "🎤 [رسالة صوتية]"
+    new_user_message_parts = [
+        types.Part.from_bytes(data=audio_bytes, mime_type="audio/wav"),
+    ]
+
+if new_user_message_parts:
+    with st.chat_message("user"):
+        st.write(display_text)
+    st.session_state.messages.append({"role": "user", "content": display_text})
+
+    try:
+        response = chat.send_message(new_user_message_parts)
+        with st.chat_message("assistant"):
+            st.write(response.text)
+        st.session_state.messages.append(
+            {"role": "assistant", "content": response.text}
+        )
+        save_current_conversation()
+        if st.session_state.speak_enabled:
+            speak_text(response.text, L["tts"])
+    except Exception as e:
+        st.error(f"❌ خطأ في إرسال الرسالة: {e}")
